@@ -8,37 +8,37 @@ class GiphyController {
         this.apiKey = apiKey;
         this.rating = rating || "PG-13";
         this.language = language || "en";
-
-        // internal function to call GIPHY API using Axios or jQuery
-        this._executeGet = function (url, doneCallback, failCallback) {
-            if (!apiKey || typeof apiKey !== "string") {
-                console.log("A GIPHY API Key is required to use GiphyController.")
-                return;
-            }
-
-            if (!doneCallback || typeof doneCallback !== "function") {
-                console.log("A call back function is required for all calls.")
-                return;
-            }
-
-            if (window.axios !== undefined) {
-                axios.get(url)
-                    .then(doneCallback)
-                    .catch(failCallback);
-            } else if (window.jQuery !== undefined) {
-                jQuery.get(url)
-                    .done(doneCallback)
-                    .fail(failCallback);
-            } else {
-                console.log("Axios or jQuery required in order to make AJAX calls.")
-            }
-        };
     }
 }
 
 // Define the prototype functions 
 
 // GET functions ==================================================
+
+// function to call GIPHY API using Axios or jQuery
+GiphyController.prototype._executeGet = function (url, doneCallback, failCallback) {
+    if (!apiKey || typeof apiKey !== "string") {
+        console.log("A GIPHY API Key is required to use GiphyController.")
+        return;
+    }
+
+    if (!doneCallback || typeof doneCallback !== "function") {
+        console.log("A call back function is required for all calls.")
+        return;
+    }
+
+    if (window.axios !== undefined) {
+        axios.get(url)
+            .then(doneCallback)
+            .catch(failCallback);
+    } else if (window.jQuery !== undefined) {
+        jQuery.get(url)
+            .done(doneCallback)
+            .fail(failCallback);
+    } else {
+        console.log("Axios or jQuery required in order to make AJAX calls.")
+    }
+};
 
 // Single ID
 GiphyController.prototype.getById = function (id, doneCallback, failCallback) {
