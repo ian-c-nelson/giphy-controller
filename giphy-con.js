@@ -21,11 +21,11 @@ class GiphyController {
                 return;
             }
 
-            if (axios) {
+            if (window.axios !== undefined) {
                 axios.get(url)
                     .then(doneCallback)
                     .catch(failCallback);
-            } else if (jQuery) {
+            } else if (window.jQuery !== undefined) {
                 jQuery.get(url)
                     .done(doneCallback)
                     .fail(failCallback);
@@ -88,6 +88,6 @@ GiphyController.prototype.paginatedSearch = function (query, limit, offset, done
 // End GET functions ==================================================
 
 // POST functions =================================================
-
+// TODO: add upload function.
 // End POST functions =================================================
 
