@@ -17,10 +17,16 @@ class GiphyController {
 
 // function to call GIPHY API using Axios or jQuery
 GiphyController.prototype._executeGet = function (url, doneCallback, failCallback) {
-    if (!apiKey || typeof apiKey !== "string") {
-        console.log("A GIPHY API Key is required to use GiphyController.")
+    if (!this.apiKey || typeof this.apiKey !== "string") {
+        console.log("A GIPHY API Key is required for all calls..")
         return;
     }
+
+    if (!url || typeof url !== "string") {
+        console.log("A url is required for all calls.")
+        return;
+    }
+
 
     if (!doneCallback || typeof doneCallback !== "function") {
         console.log("A call back function is required for all calls.")
@@ -28,11 +34,11 @@ GiphyController.prototype._executeGet = function (url, doneCallback, failCallbac
     }
 
     if (window.axios !== undefined) {
-        axios.get(url)
+        window.axios.get(url)
             .then(doneCallback)
             .catch(failCallback);
     } else if (window.jQuery !== undefined) {
-        jQuery.get(url)
+        window.jQuery.get(url)
             .done(doneCallback)
             .fail(failCallback);
     } else {
