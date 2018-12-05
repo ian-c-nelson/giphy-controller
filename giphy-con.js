@@ -97,3 +97,4 @@ GiphyController.prototype.paginatedSearch = function (query, limit, offset, done
 // TODO: add upload function.
 // End POST functions =================================================
 
+module.exports = GiphyController;
